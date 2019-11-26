@@ -1,2 +1,1 @@
-# quicklib
-Quicklib front end
+# NEXT BOILERPLATE

@@ -1,0 +1,58 @@
+ARG API_BASE=https://api.bangtin.vn
+ARG AUTH_BASE=https://api.bangtin.vn
+ARG API_TYPE=real
+ARG NODE_ENV=production
+ARG PORT=3000
+ARG PHASE=running
+ARG SSR_ACCESS_TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik5BVS05Mjg4LTU5YjAtNDcyNC1hMmRjLWYyN2IzODMyZGE5MiIsImlhdCI6MTU1NzMyMjU4OSwiZXhwIjoyODE4NzYyNTg5fQ.-RnaH7KyAPQZQlgXAcscwHTfEemtMvApXJuzQ5DiC5g'
+ARG SSR_REFRESH_TOKEN='39456c67-f567-4d14-b6d9-3f8f5e2932e0'
+
+FROM node:8-alpine as builder
+
+ARG API_BASE
+ARG AUTH_BASE
+ARG API_TYPE
+
+WORKDIR /app
+
+# To handle 'not get uid/gid'
+RUN npm config set unsafe-perm true
+
+RUN npm i yarn -g
+
+COPY . .
+
+RUN yarn install
+
+ARG APP_ENV_FILE=/app/.env
+ARG APP_ENV_CONTENT="API_BASE=$API_BASE\nAUTH_BASE=$AUTH_BASE\nAPI_TYPE=$API_TYPE\n";
+
+RUN rm -f ${APP_ENV_FILE} && touch ${APP_ENV_FILE} && echo -e $APP_ENV_CONTENT >> ${APP_ENV_FILE}
+
+RUN yarn build && yarn --production
+
+FROM keymetrics/pm2:8-alpine
+
+ARG API_BASE
+ARG AUTH_BASE
+ARG API_TYPE
+ARG NODE_ENV
+ARG PORT
+ARG PHASE
+ARG SSR_ACCESS_TOKEN
+ARG SSR_REFRESH_TOKEN
+
+ENV API_BASE=$API_BASE
+ENV AUTH_BASE=$AUTH_BASE
+ENV API_TYPE=$API_TYPE
+ENV NODE_ENV=$NODE_ENV
+ENV PORT=$PORT
+ENV PHASE=$PHASE
+ENV SSR_ACCESS_TOKEN=$SSR_ACCESS_TOKEN
+ENV SSR_REFRESH_TOKEN=$SSR_REFRESH_TOKEN
+
+WORKDIR /app
+
+COPY --from=builder /app .
+
+CMD ["yarn", "start:multicore"]

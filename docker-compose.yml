@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  ai-news-front-ins:
+    build: .
+    image: ai-news-front
+    ports:
+      - 5000:3000
