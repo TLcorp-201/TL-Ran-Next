@@ -19,7 +19,7 @@ declare global {
 
 export interface HeadersType {
   accept: string;
-  'accpet-encoding': string;
+  'accept-encoding': string;
   'accept-language': string;
   'cache-control': string;
   connection: string;
