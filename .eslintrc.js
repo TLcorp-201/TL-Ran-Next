@@ -1,14 +1,13 @@
 "use strict";
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   extends: [
     "airbnb",
     "prettier",
     "prettier/react",
-    "plugin:jest/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended", 
+    "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:compat/recommended",
     "plugin:import/warnings",
@@ -18,7 +17,6 @@ module.exports = {
     "plugin:jsx-a11y/recommended"
   ],
   plugins: [
-    "jest",
     "unicorn",
     "react-hooks",
     "prettier",
@@ -30,7 +28,6 @@ module.exports = {
     node: true,
     es6: true,
     mocha: true,
-    jest: true,
     jasmine: true
   },
   rules: {
@@ -64,6 +61,7 @@ module.exports = {
     // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
     "react/destructuring-assignment": "off",
     "react/jsx-filename-extension": "off",
+    "react/button-has-type": "off",
     // Use function hoisting to improve code readability
     "no-use-before-define": [
       "error",
@@ -71,21 +69,21 @@ module.exports = {
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
-    '@typescript-eslint/explicit-function-return-type': [
-      'off',
-      { allowTypedFunctionExpressions: true },
+    "@typescript-eslint/explicit-function-return-type": [
+      "off",
+      { allowTypedFunctionExpressions: true }
     ],
-    '@typescript-eslint/no-use-before-define': [
-      'error',
-      { functions: false, classes: true, variables: true, typedefs: true },
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { functions: false, classes: true, variables: true, typedefs: true }
     ],
-    '@typescript-eslint/no-var-requires': 0,
+    "@typescript-eslint/no-var-requires": 0,
     // Common abbreviations are known and readable
-    'unicorn/prevent-abbreviations': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/interface-name-prefix': 0,
-    '@typescript-eslint/indent': 'off',
-    '@typescript-eslint/no-non-null-assertion': 0,
+    "unicorn/prevent-abbreviations": "off",
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/no-non-null-assertion": 0,
     "import/no-cycle": 0,
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
 
@@ -101,11 +99,11 @@ module.exports = {
     "eslint-comments/no-unlimited-disable": 0,
     "no-param-reassign": 1,
     "space-before-function-paren": 0,
-    'no-useless-constructor': "off",
-    'react/prefer-stateless-function': 'warn',
-    'jsx-a11y/label-has-for': 'warn',
-    'jsx-a11y/label-has-associated-control': 'warn',
-    'global-require': 'warn',
+    "no-useless-constructor": "off",
+    "react/prefer-stateless-function": "warn",
+    "jsx-a11y/label-has-for": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "global-require": "warn",
     "prettier/prettier": [
         "error",
         {
@@ -117,14 +115,17 @@ module.exports = {
   },
   settings: {
     // support import modules from TypeScript files in JavaScript files
-    "import/resolver": { 
+    "import/resolver": {
       node: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
       alias: {
-        map: [['@', path.join(__dirname)], ['stories', path.join(__dirname) + '/stories']],
-        extensions: ['.ts', '.js', '.jsx', '.tsx'],
-      },
+        map: [
+          ["@", path.join(__dirname)],
+          ["stories", path.join(__dirname) + "/stories"]
+        ],
+        extensions: [".ts", ".js", ".jsx", ".tsx"]
+      }
     },
-    polyfills: ["fetch", "Promise", "URL", "object-assign"]
+    polyfills: ["fetch", "Promise","promises", "URL", "object-assign"]
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -136,11 +137,13 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  overrides: [{
-    files: ['**/*.ts'],
-    parser: '@typescript-eslint/parser',
-    rules: {
-      'no-undef': 'off'
+  overrides: [
+    {
+      files: ["**/*.ts"],
+      parser: "@typescript-eslint/parser",
+      rules: {
+        "no-undef": "off"
+      }
     }
-  }]
+  ]
 };
