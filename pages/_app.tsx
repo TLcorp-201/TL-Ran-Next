@@ -1,5 +1,4 @@
 import 'moment/locale/vi';
-import 'antd/dist/antd.less';
 
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
@@ -12,6 +11,9 @@ import { ApplicationState } from '@/typings.d';
 
 import { appWithTranslation, i18n } from '@/libraries/i18n';
 import configStore from '@/libraries/store/configStore';
+
+import '@/theme/index.css';
+import 'semantic-ui-css/semantic.min.css';
 
 if (process.env.NODE_ENV !== 'production' && process.browser) {
   const { registerObserver } = require('react-perf-devtool'); // eslint-disable-line
