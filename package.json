@@ -95,7 +95,7 @@
     "js-cookie": "2.2.0",
     "lodash": "^4.17.15",
     "lru-cache": "5.1.1",
-    "moment": "2.23.0",
+    "moment": "2.29.4",
     "next": "~9.0.5",
     "next-cookies": "Sly777/next-cookies#master",
     "next-i18next": "^1.1.0",
